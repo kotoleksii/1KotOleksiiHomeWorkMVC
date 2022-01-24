@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Intro.Models.ViewModels;
+using Intro.Models.Entities;
 
 namespace Intro.Controllers
 {
@@ -21,13 +22,15 @@ namespace Intro.Controllers
         [HttpPost]
         public ActionResult Register(VM_UserRegister newUser)
         {
-            //якщо реєстрація успішна - перенаправити корстувача в його акаунт
             if (ModelState.IsValid)
-            {
-                //TODO: Register User
-                //TODO: Login User
-                //Якщо реєстрація успішна - перенаправити користувача в його акаунт
-                return RedirectToAction("Account");
+            {                          
+                User user = new User
+                {
+                    Name = newUser.Name,
+                    Email = newUser.Email
+                };
+
+                return RedirectToAction("Account", user);
             }
             else
             {
@@ -35,9 +38,9 @@ namespace Intro.Controllers
             }
         }
 
-        public ViewResult Account()
+        public ViewResult Account(User user)
         {
-            return View();
+            return View(user);
         }
 
     }
