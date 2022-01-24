@@ -23,7 +23,8 @@ namespace Intro.Controllers
         public ActionResult Register(VM_UserRegister newUser)
         {
             if (ModelState.IsValid)
-            {                          
+            {
+                //TODO: Заповнити user даними з VM_UserRegister newUser
                 User user = new User
                 {
                     Name = newUser.Name,
@@ -31,6 +32,7 @@ namespace Intro.Controllers
                 };
 
                 return RedirectToAction("Account", user);
+                //TODO: Створити view - Account, де відображено дані з User user
             }
             else
             {
